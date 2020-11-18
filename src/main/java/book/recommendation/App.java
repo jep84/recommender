@@ -28,7 +28,7 @@ public class App
     {
 		//DataModel model = new FileDataModel(new File("./data/dataset.csv"));
 		
-		DataModel model = new GenericDataModel(getUserData());
+		DataModel model = new GenericDataModel(getUserData(args[0]));
 
 		UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
 		UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, model);
@@ -46,11 +46,12 @@ public class App
 	 * NOTE: This should not be used as production code.
 	 * @return
 	 */
-	private static FastByIDMap<PreferenceArray> getUserData() {
+	private static FastByIDMap<PreferenceArray> getUserData(String dataSetFile) {
 		FastByIDMap<PreferenceArray> preferences = new FastByIDMap<PreferenceArray>();
 		PreferenceArray userPreferences = new GenericUserPreferenceArray(31);
 
-		String csvFile = "./data/dataset.csv";
+		//String csvFile = "./data/dataset.csv";
+		String csvFile = dataSetFile;
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";

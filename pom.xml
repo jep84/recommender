@@ -60,6 +60,26 @@
           <version>3.8.0</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <executions>
+              <execution>
+                  <phase>package</phase>
+                  <goals>
+                      <goal>shade</goal>
+                  </goals>
+                  <configuration>
+                      <shadedArtifactAttached>true</shadedArtifactAttached>
+                      <transformers>
+                          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                              <mainClass>book.recommendation.App</mainClass>
+                          </transformer>
+                      </transformers>
+                  </configuration>
+              </execution>
+          </executions>
+        </plugin>
+        <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
@@ -92,27 +112,6 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-shade-plugin</artifactId>
-          <executions>
-              <execution>
-                  <goals>
-                      <goal>shade</goal>
-                  </goals>
-                  <configuration>
-                      <shadedArtifactAttached>true</shadedArtifactAttached>
-                      <transformers>
-                          <transformer implementation=
-                            "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                              <mainClass>book.recommendation.App</mainClass>
-                      </transformer>
-                  </transformers>
-              </configuration>
-              </execution>
-          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
