@@ -34,7 +34,12 @@ public class App {
 
 		UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
 		UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, model);
+		
+		// recomenda com base no usuario
 		UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
+
+		// recomenda com base no item
+		// https://mahout.apache.org/docs/0.13.0/api/docs/mahout-mr/org/apache/mahout/cf/taste/impl/recommender/GenericItemBasedRecommender.html
 
 		// solicita 3 recomendações para o userId "2"
 		List<RecommendedItem> recommendations = recommender.recommend(2, 3);
@@ -59,9 +64,6 @@ public class App {
 				
 				// recomenda com base no usuario
 				return new GenericUserBasedRecommender(dataModel, neighborhood, similarity);
-
-				// recomenda com base no item
-				// https://mahout.apache.org/docs/0.13.0/api/docs/mahout-mr/org/apache/mahout/cf/taste/impl/recommender/GenericItemBasedRecommender.html
 			}
 		};
 		double result = evaluator.evaluate(builder, null, model, 0.9, 1.0);
